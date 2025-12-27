@@ -104,6 +104,14 @@ const App: React.FC = () => {
       {showOnboarding && <OnboardingTour lang={lang} onComplete={handleCompleteOnboarding} />}
 
       <main className="max-w-4xl mx-auto px-4 py-8">
+        {/* Guest Mode Indicator */}
+        <div className="mb-6 flex items-center justify-center gap-2 bg-blue-50 border border-blue-100 py-2 rounded-2xl animate-fadeIn">
+          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+          <p className="text-[10px] font-black text-blue-700 uppercase tracking-widest">
+            {lang === 'lo' ? 'ໂໝດອອຟລາຍ: ຂໍ້ມູນຖືກບັນທຶກໄວ້ໃນເຄື່ອງນີ້ແລ້ວ' : (lang === 'th' ? 'โหมดออฟไลน์: บันทึกข้อมูลในเครื่องนี้แล้ว' : 'Guest Mode: Data saved to this device')}
+          </p>
+        </div>
+
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 p-6 rounded-[32px] flex flex-col sm:flex-row items-center gap-6 mb-8 shadow-xl shadow-red-900/5 animate-fadeIn">
             <div className="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center text-red-600 shrink-0">
