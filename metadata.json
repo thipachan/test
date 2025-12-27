@@ -1,0 +1,7 @@
+{
+  "name": "Lao Income Helper ",
+  "description": "A comprehensive guide and tool to help users in Laos find zero-capital income opportunities to reach a target of 200,000 LAK per day.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
