@@ -6,21 +6,20 @@ import { locales } from '../locales';
 interface HeaderProps {
   lang: Language;
   setLang: (lang: Language) => void;
+  isOnline: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
+const Header: React.FC<HeaderProps> = ({ lang, setLang, isOnline }) => {
   const t = locales[lang];
   const [deviceIdentity, setDeviceIdentity] = useState<{ id: string, type: string }>({ id: '', type: '' });
 
   useEffect(() => {
-    // Generate or retrieve a persistent Device ID
     let deviceId = localStorage.getItem('lao_income_device_id_v1');
     if (!deviceId) {
       deviceId = Math.random().toString(36).substring(2, 8).toUpperCase();
       localStorage.setItem('lao_income_device_id_v1', deviceId);
     }
 
-    // Simple device type detection
     const ua = navigator.userAgent;
     let type = 'Desktop';
     if (/tablet|ipad|playbook|silk/i.test(ua)) {
@@ -48,24 +47,32 @@ const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
             <i className="fas fa-hand-holding-dollar text-white text-xl"></i>
           </div>
           <div className="flex-1">
-            <h1 className="text-xl font-bold text-slate-900 tracking-tight">{t.appName} <span className="text-blue-600">Pro</span></h1>
-            <p className="text-[10px] text-slate-500 font-medium uppercase tracking-tight">{t.appTagline}</p>
+            <h1 className="text-xl font-black text-slate-900 tracking-tight leading-none mb-1">
+              {t.appName} <span className="text-blue-600">Pro</span>
+            </h1>
+            <div className="flex items-center gap-2">
+              <p className="text-[10px] text-slate-500 font-bold uppercase tracking-tight">{t.appTagline}</p>
+              <div className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-green-500' : 'bg-red-500'}`}></div>
+            </div>
           </div>
-          {/* Device Profile Badge for Mobile View */}
+          {/* Mobile Profile Badge */}
           <div className="sm:hidden flex items-center gap-2 bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl">
-            <i className={`fas ${getDeviceIcon()} text-blue-500 text-[10px]`}></i>
-            <span className="text-[9px] font-black text-slate-400 font-mono tracking-widest">#{deviceIdentity.id}</span>
+             <i className={`fas ${getDeviceIcon()} ${isOnline ? 'text-blue-500' : 'text-slate-400'} text-[10px]`}></i>
+            <span className="text-[9px] font-black text-slate-500 font-mono tracking-widest">#{deviceIdentity.id}</span>
           </div>
         </div>
         
         <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
-          {/* Device Profile Badge for Desktop View */}
-          <div className="hidden sm:flex items-center gap-3 bg-slate-50 border border-slate-100 px-4 py-2 rounded-2xl shadow-inner">
-            <div className="w-6 h-6 bg-white rounded-lg flex items-center justify-center text-blue-500 shadow-sm">
+          {/* Desktop Profile Badge */}
+          <div className="hidden sm:flex items-center gap-3 bg-slate-50 border border-slate-100 px-4 py-2 rounded-2xl">
+            <div className={`w-6 h-6 bg-white rounded-lg flex items-center justify-center shadow-sm ${isOnline ? 'text-blue-500' : 'text-slate-300'}`}>
               <i className={`fas ${getDeviceIcon()} text-[10px]`}></i>
             </div>
             <div>
-              <p className="text-[8px] font-black text-slate-400 uppercase tracking-tighter leading-none mb-0.5">Device Identity</p>
+              <div className="flex items-center gap-2">
+                <p className="text-[8px] font-black text-slate-400 uppercase tracking-tighter leading-none">Identity</p>
+                <div className={`w-1 h-1 rounded-full ${isOnline ? 'bg-green-500' : 'bg-red-400'}`}></div>
+              </div>
               <p className="text-[10px] font-black text-slate-900 font-mono tracking-widest leading-none">#{deviceIdentity.id}</p>
             </div>
           </div>
@@ -75,7 +82,7 @@ const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
               <button
                 key={l}
                 onClick={() => setLang(l)}
-                className={`px-3 py-1.5 rounded-full text-[10px] font-black transition-all ${lang === l ? 'bg-white text-blue-600 shadow-sm scale-105' : 'text-slate-500 hover:text-slate-700'}`}
+                className={`px-3 py-1.5 rounded-full text-[10px] font-black transition-all ${lang === l ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
               >
                 {l.toUpperCase()}
               </button>

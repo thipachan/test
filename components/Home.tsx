@@ -10,54 +10,22 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ onNavigate, lang }) => {
   const t = locales[lang];
+
   const features = [
-    {
-      id: 'plan',
-      title: t.featureEarnTitle,
-      desc: t.featureEarnDesc,
-      icon: 'fa-hand-holding-dollar',
-      color: 'bg-blue-500'
-    },
-    {
-      id: 'invest',
-      title: t.featureInvestTitle,
-      desc: t.featureInvestDesc,
-      icon: 'fa-chart-line',
-      color: 'bg-green-500'
-    },
-    {
-      id: 'stock',
-      title: t.featureStockTitle,
-      desc: t.featureStockDesc,
-      icon: 'fa-chart-simple',
-      color: 'bg-indigo-600'
-    },
-    {
-      id: 'marketing',
-      title: t.featureMarketingTitle,
-      desc: t.featureMarketingDesc,
-      icon: 'fa-bullhorn',
-      color: 'bg-orange-500'
-    },
-    {
-      id: 'analyze',
-      title: t.featureAnalyzeTitle,
-      desc: t.featureAnalyzeDesc,
-      icon: 'fa-magnifying-glass-chart',
-      color: 'bg-purple-500'
-    },
-    {
-      id: 'tracker',
-      title: t.featureTrackTitle,
-      desc: t.featureTrackDesc,
-      icon: 'fa-list-check',
-      color: 'bg-orange-500'
-    }
+    { id: 'plan', title: t.featureEarnTitle, desc: t.featureEarnDesc, icon: 'fa-hand-holding-dollar', color: 'bg-blue-500' },
+    { id: 'invest', title: t.featureInvestTitle, desc: t.featureInvestDesc, icon: 'fa-chart-line', color: 'bg-green-500' },
+    { id: 'stock', title: t.featureStockTitle, desc: t.featureStockDesc, icon: 'fa-chart-simple', color: 'bg-indigo-600' },
+    { id: 'marketing', title: t.featureMarketingTitle, desc: t.featureMarketingDesc, icon: 'fa-bullhorn', color: 'bg-orange-500' },
+    { id: 'analyze', title: t.featureAnalyzeTitle, desc: t.featureAnalyzeDesc, icon: 'fa-magnifying-glass-chart', color: 'bg-purple-500' },
+    { id: 'tracker', title: t.featureTrackTitle, desc: t.featureTrackDesc, icon: 'fa-list-check', color: 'bg-orange-500' }
   ];
 
   return (
     <div className="space-y-8 animate-fadeIn">
-      <div className="text-center py-10">
+      <div className="text-center py-6">
+        <div className="bg-blue-600 w-20 h-20 rounded-[32px] flex items-center justify-center text-white text-4xl shadow-2xl mx-auto mb-6 shadow-blue-200">
+          <i className="fas fa-hand-holding-dollar"></i>
+        </div>
         <h2 className="text-3xl font-black text-slate-900 mb-4">{t.homeTitle}</h2>
         <p className="text-slate-500 max-w-lg mx-auto">{t.homeDesc}</p>
       </div>
@@ -74,19 +42,19 @@ const Home: React.FC<HomeProps> = ({ onNavigate, lang }) => {
             </div>
             <div className="ml-4">
               <h3 className="font-bold text-slate-800 group-hover:text-blue-600 transition">{f.title}</h3>
-              <p className="text-sm text-slate-500">{f.desc}</p>
+              <p className="text-xs text-slate-500 line-clamp-2">{f.desc}</p>
             </div>
           </button>
         ))}
       </div>
 
-      <div className="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden">
-        <div className="relative z-10">
-          <h3 className="text-xl font-bold mb-2">{t.proverbTitle}</h3>
-          <p className="text-slate-300 italic">{t.proverbContent}</p>
+      <div className="bg-slate-900 rounded-3xl p-8 text-white relative overflow-hidden group">
+        <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-125 transition-transform duration-700">
+           <i className="fas fa-award text-[180px]"></i>
         </div>
-        <div className="absolute -bottom-10 -right-10 opacity-10">
-          <i className="fas fa-laos text-[160px]"></i>
+        <div className="relative z-10">
+          <h3 className="text-xl font-bold mb-2 text-blue-400">{t.proverbTitle}</h3>
+          <p className="text-slate-300 italic leading-relaxed">{t.proverbContent}</p>
         </div>
       </div>
     </div>
